@@ -1,6 +1,6 @@
 
 import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { submit } from '../../store/actions/walletAction';
 import { findWallet } from '../utils/duplicate';
 import { getData } from '../utils/getData';
@@ -15,7 +15,6 @@ const INITIAL_STATE = {
  
 const WalletAddressForm = () => {
     const [wallets, setWallets] = useState(INITIAL_STATE); 
-    const firstWalletTransactions = useSelector(state => state.walletData.firstWalletTransactions);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -33,20 +32,29 @@ const WalletAddressForm = () => {
             console.log(wallets);
     };
 
-    //0x5968BC57f39301814Fd3eeCCD9E2B954D539e8bc
-    //0x72A53cDBBcc1b9efa39c834A540550e23463AAcB
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const{firstWalletAddress, secondWalletAddress, firstWalletData, secondWalletData} = wallets
+            const{firstWalletAddress, secondWalletAddress} = wallets;
             // make api calls
             const _firstWalletData = await getData(firstWalletAddress);
             // console.log("_firstWalletData", _firstWalletData);
+            setWallets({...wallets, firstWalletData: _firstWalletData})
             const _secondWalletData = await getData(secondWalletAddress);
             // console.log("_secondWalletData", _secondWalletData);
-            const firstWalletTransactions = findWallet();
+            setWallets({...wallets, secondWalletData: _secondWalletData})
+            //get transaction matches
+            const firstWalletTransactions = findWallet(secondWalletAddress, _firstWalletData);
+            // console.log("firstWalletTransactions", firstWalletTransactions);
+            const secondWalletTransactions = findWallet(firstWalletAddress, _secondWalletData);
+            // console.log("secondWalletTransactions", secondWalletTransactions);
+            dispatch(submit(1, firstWalletAddress, _firstWalletData.result, firstWalletTransactions));
+            dispatch(submit(2, secondWalletAddress, _secondWalletData.result, secondWalletTransactions));
+            alert('Form Submitted');
+
+            //reset to INITIAL_STATE
+            setWallets(INITIAL_STATE);
 
         } catch (error) {
             alert(`error was found ${error}`);

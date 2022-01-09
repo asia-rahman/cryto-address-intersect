@@ -2,6 +2,7 @@
 import { types } from "./walletTypes";
 
 export const submit = (number, address, data, transactions) => {
+    console.log('submit was called');
     return {
         type: types.SUBMIT,
         walletData: {
