@@ -14,8 +14,10 @@ const walletData = (state, action) => {
 
         };
     };
+    console.log("made it to the reducers");
     switch(action.types){
         case types.SUBMIT:
+            console.log("made it to reducers");
             if(action.walletData.number === 1){ 
                 console.log(action.walletData.firstAddress);
             return {
