@@ -1,9 +1,9 @@
 
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {submit, SUBMIT} from '../../store/actions/walletAction';
-import {findWallet} from '../utils/duplicate';
-import {getData} from '../utils/getData';
+import { submit } from '../../store/actions/walletAction';
+import { findWallet } from '../utils/duplicate';
+import { getData } from '../utils/getData';
 
 const INITIAL_STATE = {
     // id: '',
@@ -14,9 +14,10 @@ const INITIAL_STATE = {
 };
  
 const WalletAddressForm = () => {
-
     const [wallets, setWallets] = useState(INITIAL_STATE); 
+    const firstWalletTransactions = useSelector(state => state.walletData.firstWalletTransactions);
     const dispatch = useDispatch();
+
     useEffect(() => {
         // return () => {
         //     cleanup
@@ -32,27 +33,20 @@ const WalletAddressForm = () => {
             console.log(wallets);
     };
 
+    //0x5968BC57f39301814Fd3eeCCD9E2B954D539e8bc
+    //0x72A53cDBBcc1b9efa39c834A540550e23463AAcB
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const{firstWalletAddress,secondWalletAddress, firstWalletData, secondWalletData} = wallets //deconstructing the object so that we don't have to use dotted notation
-            //make api call for data
-            const _firstWalletData = await getData(firstWalletData); //adding an _ 'underscore' to the variable name to show that it's a copy
-            const _secondWalletData = await getData(secondWalletData); 
-            const firstWalletTransactions = findWallet(secondWalletAddress, _firstWalletData);
-            const secondWalletTransactions = findWallet(firstWalletAddress, _secondWalletData);
-            dispatch(submit(1, firstWalletAddress, _firstWalletData.result, firstWalletTransactions));
-            console.log('firstWalletData Executed');
-            console.log('');
-            dispatch(submit(1, secondWalletAddress, _secondWalletData.result, secondWalletTransactions));
-            console.log('secondWalletData Executed');
-            console.log('');
-            alert('Form Submitted');
-            //reset to initial state
-            // setWallets(INITIAL_STATE)
-            // console.log(`firstWalletTransactions ${firstWalletTransactions}`);
-
+            const{firstWalletAddress, secondWalletAddress, firstWalletData, secondWalletData} = wallets
+            // make api calls
+            const _firstWalletData = await getData(firstWalletAddress);
+            // console.log("_firstWalletData", _firstWalletData);
+            const _secondWalletData = await getData(secondWalletAddress);
+            // console.log("_secondWalletData", _secondWalletData);
+            const firstWalletTransactions = findWallet();
 
         } catch (error) {
             alert(`error was found ${error}`);
@@ -76,7 +70,7 @@ const WalletAddressForm = () => {
                 <input 
                 id='1'
                 className= 'input'
-                Name= 'firstWalletAddress'
+                name= 'firstWalletAddress'
                 type='text'
                 value={wallets.firstWalletAddress.toLowerCase()} 
                 onChange={(handleChange)}
@@ -95,6 +89,13 @@ const WalletAddressForm = () => {
                 placeholder='enter second address'
                 required
                 />
+                <button
+                type= "submit"
+                className= 'btn-primary rounded form-button'
+                id='btn-submit'
+                >
+                    Submit
+                </button>
         </form>
     </div>
 </>;
