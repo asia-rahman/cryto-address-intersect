@@ -2,6 +2,7 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { submit } from '../../store/actions/walletAction';
+// import Wallets from './wallets';
 import { findWallet } from '../utils/duplicate';
 import { getData } from '../utils/getData';
 
@@ -39,16 +40,16 @@ const WalletAddressForm = () => {
             const{firstWalletAddress, secondWalletAddress} = wallets;
             // make api calls
             const _firstWalletData = await getData(firstWalletAddress);
-            // console.log("_firstWalletData", _firstWalletData);
+            console.log("_firstWalletData", _firstWalletData);
             setWallets({...wallets, firstWalletData: _firstWalletData})
             const _secondWalletData = await getData(secondWalletAddress);
-            // console.log("_secondWalletData", _secondWalletData);
+            console.log("_secondWalletData", _secondWalletData);
             setWallets({...wallets, secondWalletData: _secondWalletData})
             //get transaction matches
             const firstWalletTransactions = findWallet(secondWalletAddress, _firstWalletData);
-            // console.log("firstWalletTransactions", firstWalletTransactions);
+            console.log("firstWalletTransactions", firstWalletTransactions);
             const secondWalletTransactions = findWallet(firstWalletAddress, _secondWalletData);
-            // console.log("secondWalletTransactions", secondWalletTransactions);
+            console.log("secondWalletTransactions", secondWalletTransactions);
             dispatch(submit(1, firstWalletAddress, _firstWalletData.result, firstWalletTransactions));
             dispatch(submit(2, secondWalletAddress, _secondWalletData.result, secondWalletTransactions));
             alert('Form Submitted');
@@ -58,14 +59,12 @@ const WalletAddressForm = () => {
 
         } catch (error) {
             alert(`error was found ${error}`);
-            // setWallets(INITIAL_STATE)
+            setWallets(INITIAL_STATE)
         }
 
     };
     
     return <>
-    This is Wallet Address Form
-
     <div>
         <h3 className='container'>
         This app compares two wallet and tells you if they've had any transactions in at least the past 1k transactions. If so, it displays the results below
@@ -106,6 +105,7 @@ const WalletAddressForm = () => {
                 </button>
         </form>
     </div>
+    {/* <Wallets/> */}
 </>;
 };
  
