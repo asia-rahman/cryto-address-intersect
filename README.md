@@ -45,22 +45,34 @@ This is a basic crypto wallet data api based application that shows how many tim
 
 <!-- This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples. -->
 
+* [Yarn](https://classic.yarnpkg.com/en/docs/install#windows-stable)
 * [Reactjs](https://www.reactjs.org/)
-* [Open Weather API](https://api.openweathermap.org)
+* [React-Redux](https://react-redux.js.org/)
+* [Etherscan API](https://docs.etherscan.io/)
 * [JavaScript](https://www.javascript.com)
-* [W3 Schools](https://www.w3schools.com)
+* [Nodejs](https://www.nodejs.org)
+* [Ethers](https://docs.ethers.io/v5/) (for ethereum blockchain functions reference)
+* [Solidity](https://docs.soliditylang.org/en/v0.8.11/) (for blockchain functions reference)
+
+### MVP Provide the following:
+
+* Securely connect to Etherscan API
+* Maximize use of OOP for State management
+* All API calls display the proper object layout
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-<!-- This is an example of how you may give instructions on setting up your project locally. To get a local copy up and running follow these simple example steps. -->
-
+<!-- This is an example of how you may give instructions on setting up your project locally. -->
+To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 <!-- This is an example of how to list things you need to use the software and how to install them. -->
+* Nodejs v16.13.1
+* Yarn (more stable than npm)
 * JavaScript
 * Reactjs
-* Nodejs
+* React-Redux
 
 ### Installation
 
@@ -68,8 +80,15 @@ This is a basic crypto wallet data api based application that shows how many tim
    ```sh
    git clone https://github.com/asia-rahman/cryto-address-intersect.git
    ```
-2. Install package.json - package installer for the project
-   In the terminal use this command: npm install
+2. Install node packages from package.json
+   [read the docs here](https://classic.yarnpkg.com/en/docs/cli/)
+   ```sh
+   yarn install
+   ```
+3. Start the App
+   ```sh
+   yarn start
+   ```
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -88,10 +107,11 @@ See the [open issues](https://github.com/asia-rahman/cryto-address-intersect/iss
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+2. Run Yarn Install
+3. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+4. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+5. Push to the Branch (`git push origin feature/AmazingFeature`)
+6. Open a Pull Request
 
 <!-- LICENSE -->
 <!-- ## License

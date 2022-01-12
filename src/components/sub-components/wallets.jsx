@@ -17,30 +17,11 @@ const Wallets = () => {
         console.log(secondWalletTransactions);
         console.log(firstWalletData);
     return <>
-        {/* {
-            firstWalletTransactions && firstWalletTransactions ?
-            <div> 
-                <h4>
-                    The first wallet has had <strong> {firstWalletTransactions.length}</strong> transactions with the second wallet over the past {firstWalletData.length} transactions.
-                </h4>
-                <h4>
-                    <a 
-                        href={`https://etherscan.io/tx/${firstWalletTransactions}`} 
-                        target={'_blank'} 
-                        rel='noreferrer'
-                        > 
-                        https://etherscan.io/tx/${firstWalletTransactions} 
-                    </a>
-                </h4>
-                
-            </div> :
-            <h5>No First Wallet Transactions Found</h5>
-        } */}
         {
             firstWalletTransactions.transactions && firstWalletTransactions.transactions ?
             <div>
                 <h4>
-                    The first wallet has had <strong>{firstWalletTransactions.length}</strong> transactions with the second wallet over the past {firstWalletData.length} transactions
+                    The first wallet has had <strong>{firstWalletTransactions.transactions.length}</strong> transactions with the second wallet over the past {firstWalletData.length} transactions
                 </h4>
 
                   {  
@@ -63,7 +44,7 @@ const Wallets = () => {
             secondWalletTransactions.transactions && secondWalletTransactions.transactions ?
             <div> 
                 <h4>
-                    The second wallet has had <strong> {secondWalletTransactions.length}</strong> transactions with the first wallet over the past {secondWalletData.length} transactions.
+                    The second wallet has had <strong> {secondWalletTransactions.transactions.length}</strong> transactions with the first wallet over the past {secondWalletData.length} transactions.
                 </h4>
                 {  
                      secondWalletTransactions.transactions && secondWalletTransactions.transactions.map((hash, index) => { 

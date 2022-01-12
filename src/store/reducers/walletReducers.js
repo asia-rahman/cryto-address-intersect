@@ -25,7 +25,7 @@ const walletData = (state, action) => {
                 firstAddress: action.walletData.address,
                 firstWalletData: action.walletData.walletObj,
                 firstWalletTransactions: {
-                    transactions: [action.walletData.transactions]
+                    transactions: action.walletData.transactions
                 },
             }
         };
@@ -35,7 +35,7 @@ const walletData = (state, action) => {
                 secondAddress: action.walletData.address,
                 secondWalletData: action.walletData.walletObj,
                 secondWalletTransactions: {
-                    transactions: [action.walletData.transactions]
+                    transactions: action.walletData.transactions
                 },
             }
         };
