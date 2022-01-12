@@ -15,7 +15,7 @@ const walletData = (state, action) => {
         };
     };
     console.log("made it to the reducers");
-    switch(action.types){
+    switch(action.type){
         case types.SUBMIT:
             console.log("made it to reducers");
             if(action.walletData.number === 1){ 
@@ -24,7 +24,9 @@ const walletData = (state, action) => {
                 ...state, //spreading the object
                 firstAddress: action.walletData.address,
                 firstWalletData: action.walletData.walletObj,
-                firstWalletTransactions: action.walletData.transactions
+                firstWalletTransactions: {
+                    transactions: action.walletData.transactions
+                },
             }
         };
             if(action.walletData.number === 2){ 
@@ -32,7 +34,9 @@ const walletData = (state, action) => {
                 ...state,
                 secondAddress: action.walletData.address,
                 secondWalletData: action.walletData.walletObj,
-                secondWalletTransactions: action.walletData.transactions
+                secondWalletTransactions: {
+                    transactions: action.walletData.transactions
+                },
             }
         };
         break;
